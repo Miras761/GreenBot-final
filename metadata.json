@@ -1,0 +1,5 @@
+{
+  "name": "GreenBot AI Assistant",
+  "description": "An AI assistant by GreenGamesStudio that can chat, understand images, generate new images, and create videos with Google's Gemini API.",
+  "requestFramePermissions": []
+}
