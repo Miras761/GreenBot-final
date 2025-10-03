@@ -47,10 +47,11 @@ export default async function handler(req: Request) {
 }
 
 async function handleChat(ai: GoogleGenAI, prompt: string, imagePart?: ImagePart) {
-    // Correctly structure the 'contents' array for the Gemini API call.
+    // Correctly structure the 'contents' for the Gemini API call.
+    // For text-only, it's a string. For multimodal, it's an object with a 'parts' array.
     const contents = imagePart 
-        ? [{ parts: [{ text: prompt }, imagePart] }]
-        : [{ parts: [{ text: prompt }] }];
+        ? { parts: [{ text: prompt }, imagePart] }
+        : prompt;
 
     const response: GenerateContentResponse = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
