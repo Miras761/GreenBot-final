@@ -47,7 +47,11 @@ export default async function handler(req: Request) {
 }
 
 async function handleChat(ai: GoogleGenAI, prompt: string, imagePart?: ImagePart) {
-    const contents = imagePart ? { parts: [{ text: prompt }, imagePart] } : prompt;
+    // Correctly structure the 'contents' array for the Gemini API call.
+    const contents = imagePart 
+        ? [{ parts: [{ text: prompt }, imagePart] }]
+        : [{ parts: [{ text: prompt }] }];
+
     const response: GenerateContentResponse = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
         contents,
